@@ -1,0 +1,46 @@
+{
+  "name": "bitbucket-semaphore-status",
+  "description": "Small app that will automatically update newly created pull requests in Bitbucket with the branch's Semaphore build status.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/SimonDegraeve/bitbucket-semaphore-status",
+  "author": {
+    "name": "Simon Degraeve",
+    "email": "simon.degraeve@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SimonDegraeve/bitbucket-semaphore-status.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SimonDegraeve/bitbucket-semaphore-status/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/SimonDegraeve/bitbucket-semaphore-status/blob/master/licence"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.11.x",
+    "npm": ">=2.0.x"
+  },
+  "scripts": {
+    "start": "node --harmony index.js",
+    "test": "echo \"no test\""
+  },
+  "dependencies": {
+    "6to5": "^1.13.11",
+    "chalk": "^0.5.1",
+    "co-request": "^0.2.0",
+    "koa": "^0.13.0",
+    "koa-bodyparser": "^1.2.0",
+    "koa-ejs": "^1.1.2",
+    "koa-router": "^3.7.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "bitbucket",
+    "semaphore"
+  ]
+}

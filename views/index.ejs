@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bitbucket Semaphore Status</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <style>
+      body, html {
+        height: 100%;
+        min-height: 100%;
+      }
+      .custom-header {
+        padding-top: 25px;
+        margin-bottom: 25px;
+        background: -webkit-linear-gradient(90deg, #ECE9E6 10%, #FFFFFF 90%); /* Chrome 10+, Saf5.1+ */
+        background:    -moz-linear-gradient(90deg, #ECE9E6 10%, #FFFFFF 90%); /* FF3.6+ */
+        background:     -ms-linear-gradient(90deg, #ECE9E6 10%, #FFFFFF 90%); /* IE10 */
+        background:      -o-linear-gradient(90deg, #ECE9E6 10%, #FFFFFF 90%); /* Opera 11.10+ */
+        background:         linear-gradient(90deg, #ECE9E6 10%, #FFFFFF 90%); /* W3C */
+      }
+
+      .custom-ol li{
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid custom-header">
+      <div class="text-center">
+        <p><img src="http://s10.postimg.org/5d7u3brop/logo.png" alt="bitbucket-semaphore-status logo" style="height: 200px;"></p>
+        <h1 style="font-size: 4em; font-weight: 300; margin-bottom: 25px;">Bitbucket Semaphore Status</h1>
+
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <% if (bbUsername && bbPassword) { %>
+            <% if (isAuthenticated) { %>
+              <div class="alert alert-success" role="alert">Bitbucket connection: authenticated</div>
+            <% } else { %>
+              <div class="alert alert-danger" role="alert">Bitbucket connection: failed</div>
+            <% } %>
+          <% } else { %>
+            <div class="alert alert-warning" role="alert">Bitbucket connection: missing credentials</div>
+          <% } %>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Environment variables</h2>
+          <div class="well text-muted">
+            <% if (bbUsername) { %>
+              <span class="label label-success">Success</span>
+            <% } else { %>
+              <span class="label label-danger">Missing</span>
+            <% } %>
+            BITBUCKET_USERNAME
+            <br/><br/>
+            <% if (bbPassword) { %>
+              <span class="label label-success">Success</span>
+            <% } else { %>
+              <span class="label label-danger">Missing</span>
+            <% } %>
+            BITBUCKET_PASSWORD
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Setup</h2>
+          <ol class='custom-ol'>
+            <% if (!bbUsername || !bbPassword) { %>
+              <li>Create an API Key in Bitbucket for your team and use your team name as the username and the API Key as your password in the next step.</li>
+              <li>Set <span class="label label-default">BITBUCKET_USERNAME</span> and <span class="label label-default">BITBUCKET_PASSWORD</span> ENV variables to match with the username and password above.</li>
+            <% } %>
+            <li>
+              Add a <strong>Pull Request POST</strong> hook in Bitbucket for <strong>Create / Edit / Merge / Decline</strong> that points to:<br/>
+              <div class="well well-sm">
+                <%= host %>/pull-request/<code>&lt;SEMAPHORE_PROJECT_UUID&gt;</code>/<code>&lt;SEMAPHORE_AUTH_TOKEN&gt;</code>
+              </div>
+            </li>
+            <li>Now whenever a pull request is created, it should (almost instantly) get updated to have the <a href="https://semaphoreapp.com/docs/how-to-get-build-badge.html">Semaphore Status Badge</a> in the description.</li>
+          </ol>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <p class="text-muted">
+            Powered by <a href="https://github.com/SimonDegraeve/bitbucket-semaphore-status">bitbucket-semaphore-status</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
